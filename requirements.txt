@@ -3,4 +3,4 @@ python-dotenv
 supabase
 PyPDF2
 google-generativeai
- 
+gunicorn
