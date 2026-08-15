@@ -1,0 +1,19 @@
+# Environment variables (NEVER commit secrets)
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Local uploads (temp files, not needed in repo)
+uploads/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# VS Code
+.vscode/

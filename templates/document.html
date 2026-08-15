@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+<a href="{{ url_for('dashboard') }}" style="display:inline-block; margin-bottom: 0.75rem;">← Back to Dashboard</a>
+<h2>{{ document.filename }}</h2>
+
+<section>
+    <h3>Summary</h3>
+    <button onclick="getSummary()">Generate Summary</button>
+    <p id="summary" style="white-space: pre-line;">{{ document.summary or "" }}</p>
+</section>
+
+<section>
+    <h3>Practice MCQs</h3>
+    <button onclick="getMCQs()">Generate MCQs</button>
+    <a href="{{ url_for('quiz', doc_id=document.id) }}">Take Quiz</a>
+    <div id="mcqs"></div>
+</section>
+
+<section>
+    <h3>Ask a Question</h3>
+    <input type="text" id="question" placeholder="Ask about this document...">
+    <button onclick="askQuestion()">Ask</button>
+    <p id="answer"></p>
+</section>
+
+<script>
+const docId = "{{ document.id }}";
+
+async function getSummary() {
+    const res = await fetch(`/document/${docId}/summary`, { method: "POST" });
+    const data = await res.json();
+    document.getElementById("summary").innerText = data.summary;
+}
+
+async function getMCQs() {
+    const res = await fetch(`/document/${docId}/mcqs`, { method: "POST" });
+    const data = await res.json();
+    const container = document.getElementById("mcqs");
+    container.innerHTML = "";
+    data.mcqs.forEach((q, i) => {
+        container.innerHTML += `<p>${i+1}. ${q.question}<br>
+            A) ${q.option_a} B) ${q.option_b} C) ${q.option_c} D) ${q.option_d}<br>
+            Correct: ${q.correct_option}</p>`;
+    });
+}
+
+async function askQuestion() {
+    const question = document.getElementById("question").value;
+    const res = await fetch(`/document/${docId}/ask`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question })
+    });
+    const data = await res.json();
+    document.getElementById("answer").innerText = data.answer;
+}
+</script>
+{% endblock %}

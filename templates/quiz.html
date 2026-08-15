@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Quiz</h2>
+<form id="quizForm">
+    {% for q in questions %}
+    <div>
+        <p>{{ loop.index }}. {{ q.question_text }}</p>
+        <label><input type="radio" name="{{ q.id }}" value="A"> {{ q.option_a }}</label><br>
+        <label><input type="radio" name="{{ q.id }}" value="B"> {{ q.option_b }}</label><br>
+        <label><input type="radio" name="{{ q.id }}" value="C"> {{ q.option_c }}</label><br>
+        <label><input type="radio" name="{{ q.id }}" value="D"> {{ q.option_d }}</label><br>
+    </div>
+    {% endfor %}
+    <button type="button" onclick="submitQuiz()">Submit</button>
+</form>
+<p id="result"></p>
+<a id="backLink" href="/document/{{ document_id }}" style="display:none; margin-top: 1rem;" class="btn-primary">← Back to Document</a>
+
+<script>
+const docId = "{{ document_id }}";
+const questionIds = [{% for q in questions %}"{{ q.id }}",{% endfor %}];
+
+async function submitQuiz() {
+    const answers = {};
+    questionIds.forEach(qid => {
+        const selected = document.querySelector(`input[name="${qid}"]:checked`);
+        if (selected) answers[qid] = selected.value;
+    });
+
+    const res = await fetch(`/document/${docId}/quiz/submit`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ answers })
+    });
+    const data = await res.json();
+    document.getElementById("result").innerText = `Score: ${data.score}/${data.total}`;
+    document.getElementById("backLink").style.display = "inline-block";
+}
+</script>
+{% endblock %}

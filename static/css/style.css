@@ -1,0 +1,420 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+    --bg: #F5F7FA;
+    --surface: #FFFFFF;
+    --border: #E3E7EE;
+    --text: #1D2433;
+    --text-muted: #667085;
+    --primary: #3454D1;
+    --primary-dark: #2740A8;
+    --accent: #16A394;
+    --accent-light: #E6F7F4;
+    --danger: #E0554D;
+    --radius: 12px;
+    --shadow: 0 1px 3px rgba(20, 25, 40, 0.06), 0 1px 2px rgba(20, 25, 40, 0.04);
+}
+
+* { box-sizing: border-box; }
+
+body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+    font-family: 'Poppins', 'Inter', sans-serif;
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 0 0 0.6em;
+    color: var(--text);
+}
+
+h1 { font-size: clamp(1.5rem, 4vw, 2rem); }
+h2 { font-size: clamp(1.2rem, 3vw, 1.4rem); }
+h3 { font-size: 1.05rem; font-weight: 600; }
+
+p { margin: 0 0 1em; color: var(--text); }
+
+a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+a:hover { text-decoration: underline; }
+
+/* ---------- Layout shell ---------- */
+
+nav {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0.9rem 1.25rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 0.3rem 0;
+}
+nav a:hover { color: var(--primary); text-decoration: none; }
+
+.container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 1.75rem 1.25rem 3rem;
+}
+
+/* ---------- Cards & sections ---------- */
+
+.card, section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1.5rem;
+    margin-bottom: 1.25rem;
+}
+
+ul { padding-left: 0; list-style: none; margin: 0; }
+
+.doc-list li {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1rem 1.25rem;
+    margin-bottom: 0.75rem;
+}
+.doc-list li a { font-weight: 600; color: var(--text); }
+.doc-list li a:hover { color: var(--primary); }
+
+/* ---------- Forms & inputs ---------- */
+
+form { display: flex; flex-direction: column; gap: 0.85rem; max-width: 380px; }
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="file"] {
+    font-family: inherit;
+    font-size: 0.95rem;
+    padding: 0.65rem 0.85rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--text);
+    width: 100%;
+    transition: border-color 0.15s;
+}
+input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: var(--surface);
+}
+
+button {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.7rem 1.2rem;
+    cursor: pointer;
+    transition: background 0.15s;
+    width: fit-content;
+}
+button:hover { background: var(--primary-dark); }
+
+/* ---------- Flash messages ---------- */
+
+.flashes {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem;
+}
+.flashes li {
+    background: var(--accent-light);
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+/* ---------- Quiz radio options ---------- */
+
+label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0;
+    font-size: 0.95rem;
+    cursor: pointer;
+}
+input[type="radio"] { accent-color: var(--primary); }
+
+#result {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--accent);
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 600px) {
+    nav { padding: 0.75rem 1rem; gap: 1rem; }
+    .container { padding: 1.25rem 1rem 2.5rem; }
+    .card, section { padding: 1.1rem; }
+    form { max-width: 100%; }
+    button { width: 100%; }
+}
+/* ---------- Subtle background richness ---------- */
+
+body {
+    background: linear-gradient(180deg, #F5F7FA 0%, #EEF1F8 100%);
+    min-height: 100vh;
+}
+
+/* ---------- Document row with delete button ---------- */
+
+.doc-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+.doc-row form { margin: 0; }
+
+.btn-delete {
+    background: transparent;
+    color: var(--danger);
+    border: 1px solid var(--danger);
+    padding: 0.4rem 0.85rem;
+    font-size: 0.85rem;
+    width: auto;
+}
+.btn-delete:hover { background: var(--danger); color: #fff; }
+
+/* ---------- Primary CTA button (used for empty states etc) ---------- */
+
+.btn-primary {
+    display: inline-block;
+    background: var(--primary);
+    color: #fff !important;
+    font-weight: 600;
+    padding: 0.7rem 1.4rem;
+    border-radius: 8px;
+    text-decoration: none !important;
+}
+.btn-primary:hover { background: var(--primary-dark); }
+
+/* ---------- Empty state ---------- */
+
+.empty-state {
+    text-align: center;
+    padding: 3rem 1.5rem;
+    background: var(--surface);
+    border: 1px dashed var(--border);
+    border-radius: var(--radius);
+}
+.empty-state .empty-icon {
+    font-size: 2.75rem;
+    margin-bottom: 0.75rem;
+}
+.empty-state h3 { margin-bottom: 0.4rem; }
+.empty-state p {
+    color: var(--text-muted);
+    margin-bottom: 1.25rem;
+}
+
+/* ---------- Password show/hide ---------- */
+
+.password-wrap {
+    position: relative;
+}
+.password-wrap input {
+    padding-right: 4.2rem;
+}
+.toggle-password {
+    position: absolute;
+    right: 0.4rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    color: var(--primary);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.3rem 0.6rem;
+    width: auto;
+}
+.toggle-password:hover { background: var(--accent-light); }
+
+/* ---------- Fuller feel on tall/mobile screens ---------- */
+
+.container {
+    min-height: calc(100vh - 70px); /* fills below nav so pages don't end abruptly */
+}
+/* ---------- Welcome header ---------- */
+
+.welcome-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+.welcome-header h2 { margin-bottom: 0.25rem; }
+.welcome-sub {
+    color: var(--text-muted);
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* ---------- Stats row ---------- */
+
+.stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+.stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1.25rem;
+    text-align: center;
+}
+.stat-value {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: var(--primary);
+    line-height: 1.2;
+}
+.stat-label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 0.2rem;
+}
+
+.section-title {
+    margin-bottom: 1rem;
+}
+
+/* ---------- Document grid ---------- */
+
+.doc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+    padding: 0;
+    list-style: none;
+}
+.doc-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+.doc-card-title {
+    font-weight: 600;
+    color: var(--text);
+    word-break: break-word;
+}
+.doc-card-title:hover { color: var(--primary); }
+.doc-card form { margin: 0; align-self: flex-start; }
+
+/* ---------- Mobile: stack stats + grid to single column ---------- */
+
+@media (max-width: 600px) {
+    .stats-row { grid-template-columns: 1fr; }
+    .doc-grid { grid-template-columns: 1fr; }
+    .welcome-header { flex-direction: column; align-items: stretch; }
+    .welcome-header .btn-primary { text-align: center; }
+}
+/* ---------- Split-screen auth pages ---------- */
+
+body.auth-page { margin: 0; }
+
+.auth-split {
+    display: flex;
+    min-height: 100vh;
+}
+
+.auth-brand-panel {
+    flex: 1.1;
+    background: linear-gradient(160deg, var(--primary) 0%, var(--primary-dark) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    color: #fff;
+}
+.auth-brand-content { max-width: 420px; }
+.auth-brand-content h1 {
+    color: #fff;
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    margin-bottom: 0.75rem;
+}
+.auth-tagline {
+    color: rgba(255,255,255,0.85);
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
+}
+.auth-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+.auth-features li {
+    background: rgba(255,255,255,0.12);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+}
+
+.auth-form-panel {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: var(--bg);
+}
+.auth-form-panel .auth-card {
+    width: 100%;
+    max-width: 380px;
+}
+
+/* Hide the brand panel on narrow/mobile screens so the form takes full width */
+@media (max-width: 800px) {
+    .auth-split { flex-direction: column; }
+    .auth-brand-panel { display: none; }
+    .auth-form-panel { min-height: 100vh; }
+}
